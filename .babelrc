@@ -1,0 +1,23 @@
+{
+    "presets": [
+        ["env", {
+            "loose": true,
+            "useBuiltIns": "usage",
+            "targets": {
+                "ie": "6",
+                "chrome": "48",
+                "firefox": "48"
+            }
+        }]
+    ],
+    "plugins": [
+        ["transform-runtime", {
+            "corejs": true,
+            "helpers": true,
+            "regenerator": true,
+            "useESModules": false
+        }],
+        "syntax-dynamic-import",
+        "transform-class-properties"
+    ]
+}
