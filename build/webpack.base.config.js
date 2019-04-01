@@ -25,19 +25,19 @@ module.exports = {
 
     module: {
         rules: [{ // NOTE: You also need to install eslint from npm, if you haven't already:
-                enforce: "pre",
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: "eslint-loader",
-            }, {
-                test: /\.html$/,
-                use: 'happypack/loader?id=html',
-                include: 'src',
-                exclude: '' // 对于静态文件不进行转换
-            },
-            { test: /\.js$/, use: 'happypack/loader?id=js', include: 'src', exclude: '' },
-            { test: /\.css$/, use: 'happypack/loader?id=css', include: 'src', exclude: '' },
-            { test: /\.scss$/, use: 'happypack/loader?id=scss', include: 'src', exclude: '' }
+            enforce: "pre",
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: "eslint-loader",
+        }, {
+            test: /\.html$/,
+            use: 'happypack/loader?id=html',
+            include: 'src',
+            exclude: '' // 对于静态文件不进行转换
+        },
+        { test: /\.js$/, use: 'happypack/loader?id=js', include: 'src', exclude: '' },
+        { test: /\.css$/, use: 'happypack/loader?id=css', include: 'src', exclude: '' },
+        { test: /\.scss$/, use: 'happypack/loader?id=scss', include: 'src', exclude: '' }
         ]
     },
 

@@ -1,22 +1,28 @@
 {
     "presets": [
-        ["env", {
-            "loose": true,
-            "useBuiltIns": "usage",
-            "targets": {
-                "ie": "6",
-                "chrome": "48",
-                "firefox": "48"
-            }
-        }]
+        [
+            "@babel/env",
+            {
+      targets: {
+        edge: "17",
+        firefox: "60",
+        chrome: "67",
+        safari: "11.1",
+                },
+      useBuiltIns: "usage",
+            },
+        ]
     ],
     "plugins": [
-        ["transform-runtime", {
-            "corejs": true,
-            "helpers": true,
-            "regenerator": true,
-            "useESModules": false
-        }],
+        [
+            "transform-runtime",
+            {
+                "corejs": true,
+                "helpers": true,
+                "regenerator": true,
+                "useESModules": false
+            }
+        ],
         "syntax-dynamic-import",
         "transform-class-properties"
     ]
