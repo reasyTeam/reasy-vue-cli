@@ -1,0 +1,14 @@
+
+{
+	"deviceNum|1-60": 1,
+	"workMode": "router",
+	"wanInfo":[{
+		"wanDownloadSpeed|1-100000": 1,
+		"wanUploadSpeed|1-100000": 1,
+		"wanStatus|1": ["0", "1", "2"]
+	}],
+	"sn":1,
+	"devicename": "device1",
+	"status|1": ["0", "1", "2"],
+	"clientNum": "12"
+ }

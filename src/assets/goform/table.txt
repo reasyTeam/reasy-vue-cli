@@ -1,0 +1,8 @@
+{
+	"list|51": [{
+		"ssid": "@string(20)<input>",
+		"name": "@string(10)<script>alert(2)</script><$%#^%(*&()*)\"\">",
+		"num|+1": 1,
+		"success": "@string(5)"
+	}]
+}

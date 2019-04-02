@@ -12,18 +12,12 @@ const evn = process.env.NODE_ENV == "production" ? "production" : "development";
 
 module.exports = {
     mode: evn,
-    resolve: {
-        alias: {
-            // 活动工作流常用组件路径map
-            jquery: path.resolve(src, "components", "jquery")
-        },
-        extensions: ['.js']
-    },
 
     entry: {
         // 定义程序中打包公共文件的入口文件vendor.js
-        vendor: [path.resolve(src, 'js', 'vendor.js')],
-        vue: ['Vue']
+        // vendor: [path.resolve(src, 'js', 'vendor.js')],
+        vue: ['vue', 'vue-router']
+        // polyfill: ['@babel/polyfill']
     },
 
     output: {
