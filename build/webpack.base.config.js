@@ -27,91 +27,82 @@ module.exports = {
 
     module: {
         rules: [{ // NOTE: You also need to install eslint from npm, if you haven't already:
-                //     enforce: "pre",
-                //     test: /\.js$/,
-                //     exclude: /node_modules/,
-                //     loader: "eslint-loader",
-                // }, {
-                test: /\.vue$/,
-                // loader: 'vue-loader',
-                use: 'happypack/loader?id=vue',
-                include: config.projectRoot
-                // exclude: '' // 对于静态文件不进行转换
-            }, {
-                test: /\.html$/,
-                use: 'happypack/loader?id=html',
-                include: config.projectRoot,
-                // exclude: ''
+            //     enforce: "pre",
+            //     test: /\.js$/,
+            //     exclude: /node_modules/,
+            //     loader: "eslint-loader",
+            // }, {
+            test: /\.vue$/,
+            loader: 'vue-loader',
+            include: config.projectRoot
+            // exclude: '' // 对于静态文件不进行转换
+        }, {
+            test: /\.html$/,
+            loader: 'html-loader',
+            options: {
+                attrs: ['img:src', 'img:data-src', 'audio:src'],
+                minimize: true
             },
-            {
-                test: /\.js$/,
-                use: 'happypack/loader?id=js',
-                // include: config.projectRoot,
-                exclude: /node_modules/
+            include: config.projectRoot,
+            // exclude: ''
+        },
+        {
+            test: /(\.scss|\.css)$/,
+            use: [
+                "vue-style-loader",
+                'css-loader',
+                'postcss-loader',
+                'sass-loader',
+                {
+                    loader: 'sass-resources-loader',
+                    options: {
+                        resources: './src/css/vars.scss',
+                    }
+                }
+            ],
+            include: config.projectRoot
+        },
+        {
+            test: /\.js$/,
+            use: [{
+                loader: 'babel-loader',
+                query: {
+                    "cacheDirectory": "./node_modules/.cache_babel/"
+                }
+            }],
+            // include: config.projectRoot,
+            exclude: /node_modules/
+        },
+        {
+            test: /\.(png|jpg|png|jpeg|bmp|webp|gif)$/, //处理css和js中的图片文件
+            loader: 'url-loader',
+            options: {
+                limit: 8,
+                name: 'assets/images/[name]_[hash:5].[ext]'
             },
-            {
-                test: /\.css$/,
-                use: 'happypack/loader?id=css',
-                include: config.projectRoot
+            include: config.projectRoot //排除node_module下的所有文件
+        },
+        { //处理字体文件
+            test: /\.(eot|woff2|woff|ttf|svg)/,
+            loader: 'url-loader',
+            options: {
+                name: 'assets/fonts/[name]_[hash:5].min.[ext]',
+                limit: 5000
             },
-            {
-                test: /\.scss$/,
-                use:
-                    // ['vue-style-loader', 'css-loader', 'postcss-loader', 'sass-loader', {
-                    //     loader: 'sass-resources-loader',
-                    //     options: {
-                    //         // Provide path to the file with resources
-                    //         resources: [
-                    //             path.resolve(__dirname, '../src/css/var.scss')
-                    //         ],
-                    //     }
-                    // }],
-                    [
-                        "vue-style-loader",
-                        //MiniCssExtractPlugin.loader,
-                        'css-loader',
-                        'postcss-loader',
-                        'sass-loader',
-                        {
-                            loader: 'sass-resources-loader',
-                            options: {
-                                // Provide path to the file with resources
-                                resources: '../src/css/var.scss',
-                            },
-                        }
-                    ],
-                include: config.projectRoot
-            },
-            {
-                test: /\.(png|jpg|png|jpeg|bmp|webp|gif)$/, //处理css和js中的图片文件
-                loader: 'url-loader',
-                options: {
-                    limit: 8,
-                    name: 'assets/images/[name]_[hash:5].[ext]'
-                },
-                include: config.projectRoot //排除node_module下的所有文件
-            },
-            { //处理字体文件
-                test: /\.(eot|woff2|woff|ttf|svg)/,
-                loader: 'url-loader',
-                options: {
-                    name: 'assets/fonts/[name]_[hash:5].min.[ext]',
-                    limit: 5000
-                },
-                include: config.projectRoot
-            }
+            include: config.projectRoot
+        }
         ]
     },
 
     resolve: {
+        extensions: ['.vue', '.js', '.scss', '.css'],
         alias: {
             'vue': 'vue/dist/vue.js', //解决 [Vue warn]: You are using the runtime-only build of Vue
             '@': path.resolve('src'),
             'src': path.resolve(__dirname, '../src'),
             'components': path.resolve(__dirname, '../src/components')
             // jquery: path.resolve(src, "components", "jquery")
-        },
-        extensions: ['.js', '.vue', '.scss', '.css']
+        }
     },
 
     plugins: [
@@ -124,58 +115,6 @@ module.exports = {
         new webpack.DllReferencePlugin({
             context: process.cwd(), // 跟dll.config里面DllPlugin的context一致
             manifest: require(path.join(config.dllRoot, "vue-manifest.json"))
-        }),
-        new HappyPack({
-            id: 'vue',
-            loaders: [{
-                loader: 'vue-loader'
-            }],
-            threadPool: happyThreadPool
-        }),
-        new HappyPack({
-            id: 'js',
-            loaders: [{
-                loader: 'babel-loader',
-                query: {
-                    "cacheDirectory": "./node_modules/.cache_babel/"
-                }
-            }],
-            threadPool: happyThreadPool
-        }),
-        new HappyPack({
-            id: "html",
-            loaders: [{
-                loader: 'html-loader',
-                options: {
-                    attrs: ['img:src', 'img:data-src', 'audio:src'],
-                    minimize: true
-                }
-            }],
-            threadPool: happyThreadPool
-        }),
-        new HappyPack({
-            id: "css",
-            loaders: [{
-                loader: 'vue-style-loader'
-            }, {
-                loader: 'css-loader'
-            }, {
-                loader: 'postcss-loader'
-            }],
-            threadPool: happyThreadPool
-        }),
-        new HappyPack({
-            id: "scss",
-            loaders: [{
-                loader: "vue-style-loader"
-            }, {
-                loader: "css-loader"
-            }, {
-                loader: 'postcss-loader'
-            }, {
-                loader: "sass-loader"
-            }],
-            threadPool: happyThreadPool
         }),
         new HtmlWebpackPlugin({
             // 文件路徑

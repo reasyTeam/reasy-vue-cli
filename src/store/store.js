@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
+// import Vuex from 'vuex';
 
-Vue.use(Vuex);
+// Vue.use(Vuex);
 
 
 
@@ -11,13 +11,13 @@ export default new Vuex.Store({
   state: {
     count: 0,
     global: {
-       mode: "ap"
+      mode: "ap"
     }
   },
   mutations: {
-    increment (state) {
+    increment(state) {
       state.count++;
-      
+
     },
     getMode(state, mode) {
       state.global.mode = mode;
@@ -27,7 +27,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    increment (context) {
+    increment(context) {
       context.commit('increment');
     },
     getMode({ state, commit }, mode) {
