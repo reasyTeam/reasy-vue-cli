@@ -49,14 +49,17 @@
 	        }, 1000)*/
 	        this.$post("/port", {"list":[{"ssid":"lG$TlOL3VB0!N3OMq%Bry@CnTW@94uh4","name":"B((B1","num":-5094732,"success":false},{"ssid":"xSRg4]ViwVtSFrgHaO#i#)k$rwdpFtv@","name":"Zgt%%","num":-95822497,"success":true},{"ssid":"Wc2w!^d!exGq!Je@SYYntY@6U^&gYYgS","name":"bffvg","num":31737960,"success":true}]}, function(res) {
 
-	        });
+			});
+			
+			this.$getData("goform/table", function(res) {
+				_this.tableData.originData = res.list;
+			});
 	    },
 	    data() {
 	    	return {
 	    		has: false,
 	    		updateTimer: 0,
 	    		tableData: {
-	    			requestUrl: "goform/table",
 	    			key: "ssid",
 	    			css: "table-group",
 	    			showPage: true,

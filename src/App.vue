@@ -1,22 +1,33 @@
 <template>
     <div id="app">
-        <router-view></router-view>
+        <router-view v-if="isRouterAlive"></router-view>
     </div>
 </template>
 <script>
-var Child = {
-  template: '<h1>子组件1 {{child}}</h1>',
-  data: function() {
-      return {
-          child: "child 1"
-      }
-  }
-};
+
 export default {
     name: "App",
-    components: {
-        
-        'v-child': Child
+    provide() {
+        return {
+            reload: this.reload
+        };
+    },
+    mounted() {
+        //TODO: 刷新跳转到首页  需要判断是登录还是设置向导
+        //console.log("this.$route.path", this.$route)
+        // this.$router.push('/index');
+    },
+    data() {
+        return {
+            isRouterAlive: true
+        };
+    },
+    methods: {
+        reload(url) {
+            url && this.$router.push(url);
+            this.isRouterAlive = false;
+            this.$nextTick(() => (this.isRouterAlive = true));
+        }
     }
 };
 </script>

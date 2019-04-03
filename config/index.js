@@ -5,7 +5,7 @@ module.exports = {
         index: path.resolve(__dirname, '../src/index.html'),
         assetsRoot: path.resolve(__dirname, '../dist'),
         assetsSubDirectory: 'static',
-        assetsPublicPath: '/dist/',
+        assetsPublicPath: '',
         productionSourceMap: true,
         productionGzip: false,
         productionGzipExtensions: ['js', 'css']
@@ -13,7 +13,7 @@ module.exports = {
     dev: {
         port: 8088,
         assetsSubDirectory: 'static',
-        assetsPublicPath: '/',
+        assetsPublicPath: 'dist/',
         context: [], //代理路径
         proxypath: 'http://192.168.99.123:3010/mock/32',
         cssSourceMap: false

@@ -264,6 +264,8 @@
 			if(this.menuThird) {
 				this.thirdMenuArr = this.menuThird[to.fullPath] || this.thirdMenuArr;
 			}
+
+			console.log("update router");
 	        next();
 	    }
 	};

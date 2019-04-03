@@ -1,21 +1,22 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import '@/css/style.scss';
+//import '@/css/styles.css';
+
+
 import Vue from 'vue';
 import App from '@/App';
 
 import router from '@/router';
 
-import store from '@/store/store.js';
-
 //vue http和promise
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
-import '@/components/index';
+
+import ReasyUIVue from '@reasy-team/reasy-ui-vue';
+Vue.use(ReasyUIVue);
+
 import '@/assets/lang/b28n.js';
 import '@/libs/rem';
-
-
 
 //全局守卫
 router.beforeEach((to, from, next) => {
@@ -26,13 +27,10 @@ router.beforeEach((to, from, next) => {
 import _global from './global'; //引用
 Vue.use(_global);
 
-import '@/directives';
-
 //Vue.config.productionTip = false
 var vm = new Vue({
     el: '#app',
     router,
-    store,
     components: { App },
     template: '<App/>',
     mounted() {

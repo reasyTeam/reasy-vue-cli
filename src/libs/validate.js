@@ -174,7 +174,7 @@ var valid = {
     },
 
     ssid: function(str) {
-        var length = utils.getUtf8Length(str); //解决驱动中1个中文字符占3个字节的问题
+        var length = utils.getUtf8Length(str);
         if (length > 32) {
             return _("The length cannot be greater than %s characters.", [32]);
         }

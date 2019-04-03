@@ -6,6 +6,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const merge = require("webpack-merge");
 const CopyWebpackPlugin = require('copy-webpack-plugin'); //将特定文件输出指定位置
 const baseConfig = require("./webpack.base.config");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = merge(baseConfig, {
@@ -22,6 +23,10 @@ module.exports = merge(baseConfig, {
                 return false;
             }
         }),
+        // 提取css
+        // new MiniCssExtractPlugin({
+        //     filename: `style.css`
+        // }),
         new CleanWebpackPlugin()
     ]
 });

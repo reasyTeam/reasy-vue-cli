@@ -29,7 +29,7 @@
 				<div class="table-cell main-content" id="subMenu">
 					<div class="third" v-if="thirdMenuArr.length > 0">
 						<template v-for="thirdMenu in thirdMenuArr">
-							<router-link v-if="thirdMenu.path"
+							<router-link v-if="thirdMenu.path && !thirdMenu.hide"
 								:to="thirdMenu.path" class="third-menu" tag="span"
 								v-on:click.native="changeMenu(thirdMenu.pathUrl, true)" :key="thirdMenu.path">
 								<a>{{thirdMenu.title}}</a>
@@ -186,13 +186,12 @@
 			this.thirdMenuArr = this.menuThird[firstMenuPath];
 
 			this.menuOptions = mainMenu;
-
-
 		},
 
 		provide() {
 			return {
-				reload: this.reload
+				reload: this.reload,
+				//replaceRouter: this.replaceRouter
 			}
 		},
 
@@ -216,6 +215,12 @@
 			    	this.$router.push(url);
 			    }
 			},
+
+			/* replaceRouter(url) {
+				if(url) {
+			    	this.$router.replace(url);
+			    }
+			}, */
 
 			hasChild(url, menuObj, index, menuTree) {
 				let nexUrl = "",
@@ -255,6 +260,7 @@
 
 				//三级菜单时   url为跳转地址
 				if(thirdClick) {
+
 					redirectUrl = url;
 				} else {
 					redirectUrl = this.menuThird[url][0].pathUrl;
