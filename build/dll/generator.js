@@ -20,14 +20,16 @@ const gen = function(vendors) {
 
             output: {
                 path: path.join(src, 'js', 'dll'),
-                filename: '[name].dll.js'
+                filename: '[name].dll.js',
+                library: '[name]_[hash:5]'
+                // libraryTarget: 'this' // 将全局的指令挂载的地方
             },
 
             plugins: [
                 new webpack.DllPlugin({
                     context: process.cwd(),
                     path: path.join(src, 'js', 'dll', '[name]-manifest.json'),
-                    name: '[name]_[hash]'
+                    name: '[name]_[hash:5]'
                 })
             ]
         }

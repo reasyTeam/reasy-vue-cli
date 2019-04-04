@@ -37,7 +37,7 @@ module.exports = {
             path: path.join(src, 'js', 'dll', '[name]-manifest.json'),
 
             // 定义打包的公共vendor文件对外暴露的函数名
-            name: '[name]_[hash]'
+            name: '[name]'
         })
     ]
 }

@@ -4,6 +4,9 @@
 4. 强制使用yapi
 5. 是否需要Vuex
 7. 发送请求使用axios
+7. 添加开发环境sourcemap
+8. 添加css压缩
+9. 配置不同的服务器方式： ypai/mock-server
 
 babel-plugin-transform-runtime不能转换所有新的api，故使用babel-polyfill
 

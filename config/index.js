@@ -8,6 +8,7 @@ module.exports = {
         assetsPublicPath: '',
         productionSourceMap: true,
         productionGzip: false,
+        serverType: '', // 添加服务器类型
         productionGzipExtensions: ['js', 'css']
     },
     dev: {

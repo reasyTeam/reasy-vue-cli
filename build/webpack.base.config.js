@@ -4,16 +4,18 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HappyPack = require('happypack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = require('../config');
 
-const evn = process.env.NODE_ENV == "production" ? "production" : "development";
+const env = process.env.NODE_ENV == "production" ? "production" : "development";
+const devMode = env === "development";
 
 const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-    mode: evn,
+    mode: env,
 
     entry: {
         app: './src/main.js'
@@ -23,7 +25,7 @@ module.exports = {
         filename: '[name].js?[chunkhash:5]',
         path: config.build.assetsRoot,
         // 按需加载配置
-        publicPath: evn === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
+        publicPath: devMode ? config.dev.assetsPublicPath : config.build.assetsPublicPath,
         chunkFilename: '[name].js?[chunkhash:5]'
     },
     resolve: {
@@ -41,7 +43,8 @@ module.exports = {
         rules: [{
                 test: /\.(scss|css)$/,
                 use: [
-                    "vue-style-loader",
+                    // "vue-style-loader", 
+                    devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
                     'css-loader',
                     'postcss-loader',
                     'sass-loader',
@@ -170,6 +173,10 @@ module.exports = {
                 loader: "sass-loader"
             }],
             threadPool: happyThreadPool
+        }),
+        new MiniCssExtractPlugin({
+            filename: devMode ? 'style.css' : 'style.[hash:8].css'
+            // chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
         }),
         new HtmlWebpackPlugin({
             // 文件路徑
