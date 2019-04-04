@@ -1,7 +1,7 @@
 import { checkSubmit, checkData } from '@/libs/common';
 import { http } from '@/http';
-exports.install = function(Vue, options) {
-    
+export default function(Vue, options) {
+
     /**
      * 表单验证
      *
@@ -12,25 +12,25 @@ exports.install = function(Vue, options) {
     Vue.prototype.checkFormData = function(dataObj, hasPromise) {
 
         //配置为支持promise时
-        if(hasPromise) {
-            let submitFunc =  new Promise((resolve, reject) => {
+        if (hasPromise) {
+            let submitFunc = new Promise((resolve, reject) => {
                 let checkSuccess = checkSubmit(dataObj);
-                if(checkSuccess) {
+                if (checkSuccess) {
                     resolve();
                 } else {
                     Vue.prototype.$message("check error");
                 }
             });
             return submitFunc;
-        } 
+        }
 
         let checkSuccess = checkSubmit(dataObj);
-        if(!checkSuccess) {
+        if (!checkSuccess) {
             Vue.prototype.$message("check error");
         }
         return checkSuccess;
     };
-    
+
     Vue.prototype.checkData = checkData;
     Vue.prototype.$getData = http.get;
     Vue.prototype.$post = http.post;
