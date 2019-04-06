@@ -9,8 +9,8 @@ import App from '@/App';
 import router from '@/router';
 
 //vue http和promise
-import VueResource from 'vue-resource';
-Vue.use(VueResource);
+// import VueResource from 'vue-resource';
+// Vue.use(VueResource);
 
 import ReasyUIVue from '@reasy-team/reasy-ui-vue';
 Vue.use(ReasyUIVue);

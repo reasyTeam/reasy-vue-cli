@@ -8,7 +8,8 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --colors --display-modules",
     "dllold": "cross-env NODE_ENV=production webpack --config build/webpack.dll.config.old.js --colors --display-modules",
-    "dll": "node build/webpack.dll.config.js"
+    "dll": "node build/webpack.dll.config.js",
+    "mock": "cd dist && node --inspect-brk=9229 ../mockDebug.js"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.5.0",
+    "mock-mini-server": "^1.0.2",
     "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
