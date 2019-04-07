@@ -7,6 +7,8 @@
 7. 添加开发环境sourcemap
 8. 添加css压缩
 9. 配置不同的服务器方式： ypai/mock-server
+10. app.js文件中还存在vue.js文件
+11. 添加端口被占用，从新端口开启server
 
 babel-plugin-transform-runtime不能转换所有新的api，故使用babel-polyfill
 

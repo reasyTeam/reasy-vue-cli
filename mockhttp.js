@@ -2,11 +2,12 @@ module.exports = {
 	/**
 	 * 全数据文件名称
 	 */
-	defaultDataFile: "",
+	defaultDataFile: "basicData.js",
 	/**
 	 * 所有数据文件的根目录
 	 */
-	baseDist: "",
+	baseDist: "goform",
+	contentBase: './dist',
 	/**
 	 * 本地服务器端口
 	 */
@@ -14,7 +15,7 @@ module.exports = {
 	/**
 	 * 是否自动打开浏览器
 	 */
-	openBrowser: false,
+	openBrowser: true,
 	/**
 	 * 中间件，拦截请求之类的操作
 	 */

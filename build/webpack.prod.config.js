@@ -1,22 +1,23 @@
 /*eslint-disable*/
 const path = require("path");
 const webpack = require('webpack');
-// const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const merge = require("webpack-merge");
 // const CopyWebpackPlugin = require('copy-webpack-plugin'); //将特定文件输出指定位置
 const baseConfig = require("./webpack.base.config");
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
+const config = require('../config');
 
 
 module.exports = merge(baseConfig, {
     optimization: {
-        minimizer: [
+        minimizer: config.build.minify ? [
             new TerserPlugin({
                 cache: 'node_modules/.cache_UglifyJsPlugin/',
                 parallel: 4,
+                sourceMap: config.build.sourceMap,
                 terserOptions: {
                     output: {
                         comments: false,
@@ -24,7 +25,7 @@ module.exports = merge(baseConfig, {
                 }
             }),
             new OptimizeCSSAssetsPlugin({})
-        ]
+        ] : []
     },
     plugins: [
         // new UglifyJsPlugin({

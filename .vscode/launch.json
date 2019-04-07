@@ -11,15 +11,9 @@
             "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run-script",
-                "mock"
+                "mockDebug"
             ],
             "port": 9229
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}\\index.js"
         }
     ]
 }

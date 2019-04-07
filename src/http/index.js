@@ -1,10 +1,12 @@
 import Vue from 'vue';
 //环境变量控制请求接口
-var baseUrl = PROXY_HTTP_HOST || "";
+// var baseUrl = PROXY_HTTP_HOST || "";
+
+var baseUrl = "";
 
 class Http {
 	get(url, callback) {
-		if (url.indexOf("/") != 0) {
+		if (!/^\//.test(url)) {
 			url = "/" + url;
 		}
 		Vue.http({
@@ -17,7 +19,7 @@ class Http {
 		}).then(function (res) {
 			callback(res.data);
 
-		}, function (res) {});
+		}, function (res) { });
 	}
 	post(url, data, callback) {
 		if (url.indexOf("/") != 0) {
@@ -35,7 +37,7 @@ class Http {
 		}).then(function (res) {
 			callback(res.data);
 
-		}, function (res) {});
+		}, function (res) { });
 	}
 }
 

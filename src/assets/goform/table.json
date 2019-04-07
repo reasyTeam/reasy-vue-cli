@@ -1,8 +1,0 @@
-{
-	"list|4-10": [{
-		"ssid": "@string(10)<input>",
-		"name": "<script>alert(2)</script><$%#^%(*&()*)\"\">",
-		"num|+1": 1,
-		"success": "@string(5)"
-	}]
-}

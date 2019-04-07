@@ -3,7 +3,6 @@ const webpack = require('webpack');
 // const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const HappyPack = require('happypack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = require('../config');
@@ -11,7 +10,6 @@ const config = require('../config');
 const env = process.env.NODE_ENV == "production" ? "production" : "development";
 const devMode = env === "development";
 
-const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
@@ -31,7 +29,6 @@ module.exports = {
     resolve: {
         extensions: ['.vue', '.js'], // 引用对应的文件可以省略后缀名
         alias: {
-            'vue': 'vue/dist/vue.js', //解决 [Vue warn]: You are using the runtime-only build of Vue
             '@': path.resolve('src'),
             'src': path.resolve(__dirname, '../src'),
             'components': path.resolve(__dirname, '../src/components')
@@ -40,14 +37,32 @@ module.exports = {
     },
 
     module: {
-        rules: [{
-                test: /\.(scss|css)$/,
+        rules: [
+            // { // NOTE: You also need to install eslint from npm, if you haven't already:
+            //     enforce: "pre",
+            //     test: /\.js$/,
+            //     exclude: /node_modules/,
+            //     loader: "eslint-loader",
+            // }, 
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                include: config.projectRoot
+                // exclude: '' // 对于静态文件不进行转换
+            }, {
+                test: /\.css$/,
                 use: [
-                    // "vue-style-loader", 
+                    devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader'
+                ],
+                exclude: /node_modules/
+            }, {
+                test: /\.scss$/,
+                use: [
                     devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
                     'css-loader',
                     'postcss-loader',
-                    'sass-loader',
                     'sass-loader',
                     {
                         loader: 'sass-resources-loader',
@@ -58,16 +73,6 @@ module.exports = {
                     }
                 ],
                 exclude: /node_modules/
-            }, { // NOTE: You also need to install eslint from npm, if you haven't already:
-                //     enforce: "pre",
-                //     test: /\.js$/,
-                //     exclude: /node_modules/,
-                //     loader: "eslint-loader",
-                // }, {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                include: config.projectRoot
-                // exclude: '' // 对于静态文件不进行转换
             }, {
                 test: /\.html$/,
                 loader: 'html-loader',
@@ -122,58 +127,6 @@ module.exports = {
             context: process.cwd(),
             manifest: require(path.join(config.dllRoot, "vue-manifest.json"))
         }),
-        new HappyPack({
-            id: 'vue',
-            loaders: [{
-                loader: 'vue-loader'
-            }],
-            threadPool: happyThreadPool
-        }),
-        new HappyPack({
-            id: 'js',
-            loaders: [{
-                loader: 'babel-loader',
-                query: {
-                    "cacheDirectory": "./node_modules/.cache_babel/"
-                }
-            }],
-            threadPool: happyThreadPool
-        }),
-        new HappyPack({
-            id: "html",
-            loaders: [{
-                loader: 'html-loader',
-                options: {
-                    attrs: ['img:src', 'img:data-src', 'audio:src'],
-                    minimize: true
-                }
-            }],
-            threadPool: happyThreadPool
-        }),
-        new HappyPack({
-            id: "css",
-            loaders: [{
-                loader: 'vue-style-loader'
-            }, {
-                loader: 'css-loader'
-            }, {
-                loader: 'postcss-loader'
-            }],
-            threadPool: happyThreadPool
-        }),
-        new HappyPack({
-            id: "scss",
-            loaders: [{
-                loader: "vue-style-loader"
-            }, {
-                loader: "css-loader"
-            }, {
-                loader: 'postcss-loader'
-            }, {
-                loader: "sass-loader"
-            }],
-            threadPool: happyThreadPool
-        }),
         new MiniCssExtractPlugin({
             filename: devMode ? 'style.css' : 'style.[hash:8].css'
             // chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
@@ -190,6 +143,15 @@ module.exports = {
             from: 'src/js/dll/*.js',
             to: 'dll/',
             flatten: true
+        }, {
+            from: 'src/assets/goform/',
+            to: 'goform/',
+            flatten: true
+        }, {
+            context: 'src/assets/lang',
+            from: '**/*.json',
+            to: 'lang/',
+            flatten: false
         }])
     ]
 }
