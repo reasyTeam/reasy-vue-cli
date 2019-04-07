@@ -28,18 +28,6 @@ module.exports = merge(baseConfig, {
         ] : []
     },
     plugins: [
-        // new UglifyJsPlugin({
-        //     cache: 'node_modules/.cache_UglifyJsPlugin/',
-        //     parallel: 4,
-        //     chunkFilter: (chunk) => {
-        //         // Exclude uglification for the `vendor` chunk
-        //         if (chunk.name === 'components') {
-        //             return true;
-        //         }
-
-        //         return false;
-        //     }
-        // }),
         new CleanWebpackPlugin()
     ]
 });

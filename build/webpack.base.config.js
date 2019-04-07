@@ -20,11 +20,11 @@ module.exports = {
     },
 
     output: {
-        filename: '[name].js?[chunkhash:5]',
+        filename: '[name].js?[hash:5]',
         path: config.build.assetsRoot,
         // 按需加载配置
-        publicPath: devMode ? config.dev.assetsPublicPath : config.build.assetsPublicPath,
-        chunkFilename: '[name].js?[chunkhash:5]'
+        publicPath: config.assetsPublicPath,
+        chunkFilename: '[name].js?[hash:5]'
     },
     resolve: {
         extensions: ['.vue', '.js'], // 引用对应的文件可以省略后缀名
@@ -133,7 +133,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             // 文件路徑
-            template: path.resolve(process.cwd(), 'index.html'),
+            template: config.build.index,
             filename: 'index.html',
             inject: 'body',
             // 需要加載的js，對應entries屬性名
