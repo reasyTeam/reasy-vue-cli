@@ -16,7 +16,7 @@ const routes = [
     { path: '/', redirect: 'index' },
     { path: '/login', name: 'login', component: login },
     { path: '/quickset', name: 'quickset', component: quickset },
-    { path: '/index', name: 'index', component: index },
+    { path: '/index', name: 'index', component: index, children: [] },
     // 未匹配到的路由全部重定向到index，如果项目提供404页面，可以修改为重定向到404
     { path: '*', redirect: 'index' }
 ]
