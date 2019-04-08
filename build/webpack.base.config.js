@@ -1,3 +1,8 @@
+/**
+ * @desc
+ * webpack基础配置
+ */
+
 const path = require('path');
 const webpack = require('webpack');
 // const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -21,18 +26,16 @@ module.exports = {
 
     output: {
         filename: '[name].js?[hash:5]',
-        path: config.build.assetsRoot,
+        path: devMode ? config.dev.assetsRoot : config.build.assetsRoot,
+        publicPath: devMode ? config.dev.assetsPublicPath : config.build.assetsPublicPath,
         // 按需加载配置
-        publicPath: config.assetsPublicPath,
-        chunkFilename: '[name].js?[hash:5]'
+        chunkFilename: 'pages/[name].js?[hash:5]'
     },
     resolve: {
         extensions: ['.vue', '.js'], // 引用对应的文件可以省略后缀名
         alias: {
-            '@': path.resolve('src'),
-            'src': path.resolve(__dirname, '../src'),
-            'components': path.resolve(__dirname, '../src/components')
-            // jquery: path.resolve(src, "components", "jquery")
+            'vue': 'vue/dist/vue.min.js',
+            '@': path.resolve('src')
         }
     },
 
@@ -127,6 +130,10 @@ module.exports = {
             context: process.cwd(),
             manifest: require(path.join(config.dllRoot, "vue-manifest.json"))
         }),
+        new webpack.DllReferencePlugin({
+            context: process.cwd(),
+            manifest: require(path.join(config.dllRoot, "lib-manifest.json"))
+        }),
         new MiniCssExtractPlugin({
             filename: devMode ? 'style.css' : 'style.[hash:8].css'
             // chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
@@ -140,7 +147,7 @@ module.exports = {
             chunks: ['app']
         }),
         new CopyPlugin([{
-            from: 'src/js/dll/*.js',
+            from: 'static/js/*.js',
             to: 'dll/',
             flatten: true
         }, {

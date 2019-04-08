@@ -1,7 +1,13 @@
+/**
+ * @desc
+ * webpack配置生成器
+ * 解决相互依赖，重复打包问题
+ */
+
 const path = require('path')
 const webpack = require('webpack')
 
-const src = path.resolve(__dirname, '../../src'); // 源码目录
+const src = path.resolve(__dirname, '../../static'); // 源码目录
 
 const buildConfig = require('../../config');
 
@@ -19,7 +25,7 @@ const gen = function(vendors) {
             },
 
             output: {
-                path: path.join(src, 'js', 'dll'),
+                path: path.join(src, 'js'),
                 filename: '[name].dll.js',
                 library: '[name]_[hash:5]'
                 // libraryTarget: 'this' // 将全局的指令挂载的地方
@@ -28,7 +34,7 @@ const gen = function(vendors) {
             plugins: [
                 new webpack.DllPlugin({
                     context: process.cwd(),
-                    path: path.join(src, 'js', 'dll', '[name]-manifest.json'),
+                    path: path.join(src, 'js', '[name]-manifest.json'),
                     name: '[name]_[hash:5]'
                 })
             ]

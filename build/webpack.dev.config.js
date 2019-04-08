@@ -1,3 +1,8 @@
+/**
+ * @desc
+ * webpack开发环境配置
+ */
+
 /*eslint-disable*/
 const path = require("path");
 const fs = require("fs");
@@ -18,6 +23,8 @@ let server;
 
 // 强制使用yapi代理
 let devServer = {
+    hot: true,
+    open: true,
     port: config.dev.port
     // proxy: {
     //     "/**": {
@@ -28,5 +35,12 @@ let devServer = {
 
 module.exports = merge(baseConfig, {
     devtool: '#eval-source-map',
-    devServer
+    devServer,
+    // watch: true,
+    // watchOptions: {
+    //     // 不监听的 node_modules 目录下的文件
+    //     ignored: /node_modules/,
+    //     aggregateTimeout: 300,
+    //     poll: 500
+    // }
 });

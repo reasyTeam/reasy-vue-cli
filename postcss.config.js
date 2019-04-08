@@ -1,6 +1,10 @@
-/*Postcss配置文件*/
+/**
+ * @desc
+ * Postcss配置文件
+ */
+
 module.exports = {
-	plugins: [
-		require('autoprefixer')
-	]
+    plugins: [
+        require('autoprefixer')
+    ]
 }
