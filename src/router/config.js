@@ -4,34 +4,34 @@ let routerConfig = [{
     icon: "icon-sys-status",
     children: [{
         item: "sysInfo",
-        title: "System Info",
-        path: "@/pages/modules/sysInfo.vue"
+        title: _("System Info"),
+        path: "/sysInfo"
     }]
 }, {
     item: "network",
-    title: "Internet Settings",
+    title: _("Internet Settings"),
     icon: "icon-internet",
     children: [{
         item: "wanSet",
-        title: "Internet Settings",
-        path: "@/pages/modules/wanSet.vue"
+        title: _("Internet Settings"),
+        path: "/wanSet"
     }]
 }, {
     item: "Wireless",
-    title: "Wireless",
+    title: _("Wireless"),
     icon: "icon-setting",
     children: [{
-            "item": "wirelessName",
-            "name": "Wireless Settings",
-            path: "@/pages/modules/wirelessName.vue"
-        },
-        {
-            "item": "wirelessAccess",
-            "name": "MAC Filters",
-            path: "@/pages/modules/wirelessAccess.vue",
-            "showHelp": true,
-            "hasToolBar": true
-        }
+        item: "wirelessName",
+        title: _("Wireless Settings"),
+        path: "/wirelessName"
+    },
+    {
+        item: "wirelessAccess",
+        title: _("MAC Filters"),
+        path: "/wirelessAccess",
+        "showHelp": true,
+        "hasToolBar": true
+    }
     ]
 }];
 
