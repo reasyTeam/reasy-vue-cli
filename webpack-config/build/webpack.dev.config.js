@@ -11,11 +11,12 @@ const merge = require("webpack-merge");
 const baseConfig = require("./webpack.base.config");
 const webpack = require("webpack");
 const mockServer = require('mock-mini-server');
-
+// mock-mini-server引用了全局的mockhttp配置，修改配置文件需谨慎
 let mockConfig = require('../mockhttp.js'),
     server;
+
+// mock-mini-server相关配置
 if (config.dev.serverType === 1) {
-    // 修改地址，保证dev目录下面会有dist文件夹
     mockConfig.contentBase = path.join(__dirname, '../src/');
     mockConfig.port = config.dev.proxyPort
     mockConfig.openBrowser = false;

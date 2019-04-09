@@ -1,7 +1,10 @@
 <template>
   <div>
-    <h2>System Status!!! !!!</h2>
-
+    <div class="g-logo align-c">
+      <h2>@ReasyTeam</h2>
+      <a herf="https://github.com/reasyTeam/reasy-vue-cli">REASY-VUE-CLI</a>
+    </div>
+    
     <v-group title="下拉框">
       <v-select :dataKey="select"></v-select>
     </v-group>

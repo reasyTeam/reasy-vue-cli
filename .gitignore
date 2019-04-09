@@ -2,3 +2,5 @@ node_modules
 dist
 static
 preVersion
+vue-cli
+test/
