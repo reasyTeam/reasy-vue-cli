@@ -2,8 +2,9 @@ import Vue from 'vue';
 import App from '@/App';
 import router from '@/router';
 import ReasyUIVue from '@reasy-team/reasy-ui-vue';
-// import $http from '@/libs/http';
+import $http from '@/libs/http';
 import '@/assets/lang/b28n.js';
+import '@/css/common.scss';
 
 // Vue插件全局注入
 Vue.use(ReasyUIVue);
@@ -14,7 +15,7 @@ router.beforeEach((to, from, next) => {
 });
 
 // 挂载全局请求方法
-// Vue.$http = Object.create($http);
+Vue.prototype.$http = $http;
 
 var vm = new Vue({
     el: '#app',

@@ -121,40 +121,27 @@ module.exports = {
 
     plugins: [
         new VueLoaderPlugin(),
-        // dllPlugin关联配置
-        new webpack.DllReferencePlugin({
-            context: process.cwd(), // 跟dll.config里面DllPlugin的context一致
-            manifest: require(path.join(config.dllRoot, "plugin-manifest.json"))
-        }),
-        new webpack.DllReferencePlugin({
-            context: process.cwd(),
-            manifest: require(path.join(config.dllRoot, "vue-manifest.json"))
-        }),
-        new webpack.DllReferencePlugin({
-            context: process.cwd(),
-            manifest: require(path.join(config.dllRoot, "lib-manifest.json"))
-        }),
         new MiniCssExtractPlugin({
             filename: devMode ? 'style.css' : 'style.[hash:8].css'
             // chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
         }),
         new HtmlWebpackPlugin({
             // 文件路徑
-            template: config.build.index,
+            template: config.index,
             filename: 'index.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeRedundantAttributes: false,
+                removeScriptTypeAttributes: false,
+                removeStyleLinkTypeAttributes: false,
+                useShortDoctype: true
+            },
             inject: 'body',
-            // 需要加載的js，對應entries屬性名
-            chunks: ['app']
+            chunks: ['app'],
+            dllPlugins: devMode ? [] : ['vue', 'plugin', 'lib']
         }),
         new CopyPlugin([{
-            from: 'static/js/*.js',
-            to: 'dll/',
-            flatten: true
-        }, {
-            from: 'src/assets/goform/',
-            to: 'goform/',
-            flatten: true
-        }, {
             context: 'src/assets/lang',
             from: '**/*.json',
             to: 'lang/',

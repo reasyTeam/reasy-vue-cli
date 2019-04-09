@@ -4,7 +4,7 @@ let routerConfig = [{
     icon: "icon-sys-status",
     children: [{
         item: "sysInfo",
-        title: _("System Info"),
+        title: _("System Status"),
         path: "/sysInfo"
     }]
 }, {
@@ -21,17 +21,17 @@ let routerConfig = [{
     title: _("Wireless"),
     icon: "icon-setting",
     children: [{
-        item: "wirelessName",
-        title: _("Wireless Settings"),
-        path: "/wirelessName"
-    },
-    {
-        item: "wirelessAccess",
-        title: _("MAC Filters"),
-        path: "/wirelessAccess",
-        "showHelp": true,
-        "hasToolBar": true
-    }
+            item: "wirelessName",
+            title: _("Wireless Settings"),
+            path: "/wirelessName"
+        },
+        {
+            item: "wirelessAccess",
+            title: _("Wireless Access"),
+            path: "/wirelessAccess",
+            "showHelp": true,
+            "hasToolBar": true
+        }
     ]
 }];
 

@@ -4,19 +4,23 @@ import '@/assets/lang/b28n.js';
 
 Vue.use(VueRouter);
 
-const login = () => import(/* webpackChunkName: "login" */ '@/pages/login');
-const quickset = () => import(/* webpackChunkName: "quickset" */ '@/pages/quickset');
-const index = () => import(/* webpackChunkName: "index" */ '@/pages/index');
-const sysInfo = () => import(/* webpackChunkName: "sysInfo" */ '@/pages/modules/sysInfo');
-const wanSet = () => import(/* webpackChunkName: "wanSet" */ '@/pages/modules/wanSet');
-const wirelessAccess = () => import(/* webpackChunkName: "wirelessAccess" */ '@/pages/modules/wireless/wirelessAccess');
-const wirelessName = () => import(/* webpackChunkName: "wirelessName" */ '@/pages/modules/wireless/wirelessName');
+// 中间的注释【webpackChunkName: "login"】为按需加载打包后的chunkfilename
+// 如果不配置，默认以id进行命名
+const login = () => import( /* webpackChunkName: "login" */ '@/pages/login');
+const quickset = () => import( /* webpackChunkName: "quickset" */ '@/pages/quickset');
+const index = () => import( /* webpackChunkName: "index" */ '@/pages/index');
+const sysInfo = () => import( /* webpackChunkName: "sysInfo" */ '@/pages/modules/sysInfo');
+const wanSet = () => import( /* webpackChunkName: "wanSet" */ '@/pages/modules/wanSet');
+const wirelessAccess = () => import( /* webpackChunkName: "wirelessAccess" */ '@/pages/modules/wireless/wirelessAccess');
+const wirelessName = () => import( /* webpackChunkName: "wirelessName" */ '@/pages/modules/wireless/wirelessName');
 
 const routes = [
     { path: '/login', name: 'login', component: login },
     { path: '/quickset', name: 'quickset', component: quickset },
     {
-        path: '/', name: 'index', component: index,
+        path: '/',
+        name: 'index',
+        component: index,
         children: [
             { path: '', redirect: 'sysinfo' },
             { path: 'sysinfo', name: 'sysinfo', component: sysInfo },

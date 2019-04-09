@@ -10,7 +10,7 @@ const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const merge = require("webpack-merge");
-// const CopyWebpackPlugin = require('copy-webpack-plugin'); //将特定文件输出指定位置
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const baseConfig = require("./webpack.base.config");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
@@ -47,6 +47,28 @@ module.exports = merge(baseConfig, {
         ] : []
     },
     plugins: [
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        // dllPlugin关联配置
+        new webpack.DllReferencePlugin({
+            context: process.cwd(), // 跟dll.config里面DllPlugin的context一致
+            manifest: require(path.join(config.dllRoot, "plugin-manifest.json"))
+        }),
+        new webpack.DllReferencePlugin({
+            context: process.cwd(),
+            manifest: require(path.join(config.dllRoot, "vue-manifest.json"))
+        }),
+        new webpack.DllReferencePlugin({
+            context: process.cwd(),
+            manifest: require(path.join(config.dllRoot, "lib-manifest.json"))
+        }),
+        new CopyWebpackPlugin([{
+            from: 'static/js/*.js',
+            to: 'dll/',
+            flatten: true
+        }, {
+            from: 'src/goform/',
+            to: 'goform/',
+            flatten: true
+        }])
     ]
 });

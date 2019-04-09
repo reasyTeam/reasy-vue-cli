@@ -1,0 +1,48 @@
+html,
+body {
+  font-family: Microsoft YaHei, Hiragino Sans GB, Arial, sans-serif;
+  font-size: 14px;
+  color: $mian-font-color;
+}
+
+body {
+  position: relative;
+  padding: 70px 0;
+  background-color: $main-bg-color;
+}
+
+a {
+  cursor: pointer;
+  color: $mian-font-color;
+  text-decoration: none;
+}
+
+.clear-fix {
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+  }
+}
+
+.float-l {
+  float: left;
+}
+
+.float-r {
+  float: right;
+}
+
+.align-l {
+  text-align: left;
+}
+
+.align-c {
+  text-align: center;
+}
+
+.align-r {
+  text-align: right;
+}
