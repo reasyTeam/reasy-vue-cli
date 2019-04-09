@@ -5,9 +5,12 @@ import ReasyUIVue from '@reasy-team/reasy-ui-vue';
 import $http from '@/libs/http';
 import '@/assets/lang/b28n.js';
 import '@/css/common.scss';
+import Ad from '@/pages/components/ad';
 
 // Vue插件全局注入
 Vue.use(ReasyUIVue);
+
+Vue.component('ad', Ad);
 
 //全局守卫，判断当前用户的操作权限可以在此处进行
 router.beforeEach((to, from, next) => {

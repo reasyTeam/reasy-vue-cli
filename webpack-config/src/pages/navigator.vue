@@ -13,7 +13,12 @@
           </li>
         </ul>
       </template>
-      <router-link v-else :to="item.children[0].path" class="item-text">{{item.children[0].title}}</router-link>
+      <router-link
+        v-else
+        :to="item.children[0].path"
+        class="item-text"
+        :class="activeGroup=== item.item ? 'active':''"
+      >{{item.children[0].title}}</router-link>
     </li>
   </ul>
 </template>
@@ -23,9 +28,9 @@ import navConfig from "@/router/config";
 
 let pathToGroup = {};
 navConfig.forEach(nav => {
-  if (nav.children.length > 1) {
+  if (nav.children) {
     nav.children.forEach(child => {
-      pathToGroup[child.path] = nav.item;
+      pathToGroup[child.path.toLowerCase()] = nav.item;
     });
   }
 });
@@ -39,7 +44,7 @@ export default {
   },
   methods: {
     updateItem() {
-      this.activeGroup = pathToGroup[this.$route.path];
+      this.activeGroup = pathToGroup[this.$route.path.toLowerCase()];
     }
   },
   watch: {
@@ -67,11 +72,12 @@ export default {
   &.inline {
     padding-left: 54px;
   }
-}
 
-.router-link-active {
-  background-color: $main-active-color;
-  color: #fff;
+  &.router-link-active,
+  &.active {
+    background-color: $main-active-color;
+    color: #fff;
+  }
 }
 
 .nav-title {

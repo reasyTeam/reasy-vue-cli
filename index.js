@@ -20,26 +20,26 @@ program
     .usage('<command> [options], use order(reasy-vue-cli -h) for help information');
 
 program
-    .command("init")
-    .action(init);
+    .command('*')
+    .action((baseDir) => {
+        cwd = path.join(cwd, baseDir);
+        init();
+    });
 
 function init() {
-    console.log(`REASY-VUE-CLI v${version}`);
-    console.log(`Creating project in ${cwd}`);
-    console.log(`Installing CLI plugins.This might take a while...`);
+    log(`reasy-vue-cli v${version}`);
+    log(`在目录[${cwd}]下初始化项目`);
     // 添加命令行交互，处理指令
     generateProject();
 }
 
 function generateProject() {
     //首先将webpack配置移植过去
-    fo.copyDirSync(path.join(__dirname, "./webpack-config"), cwd, /(node_modules|static|dist)$/ig);
+    // fo.copyDirSync(path.join(__dirname, "./webpack-config"), cwd, /(node_modules|static|dist)$/ig);
+    fo.copyDirSync(path.join(__dirname, "./test"), cwd);
 
     //开始安装依赖   
-    install()
-        .catch(e => {
-            throw e;
-        });
+    install();
 }
 
 /**
@@ -52,7 +52,7 @@ function install() {
             // 检查cnpm是否安装  
             .then(isCnpmInstalled)
             // 使用cnpm安装   
-            .then(installDependencies)
+            .then(res => installDependencies(res))
             .then(() => {
                 console.log("现在可以运行如下指令:");
                 console.log("调试环境: npm run dev");
@@ -60,7 +60,9 @@ function install() {
                 console.log("生产环境: npm run build");
                 resolve();
             })
-            .catch(reject);
+            .catch(error => {
+                log(error);
+            });
     });
 }
 
@@ -68,15 +70,16 @@ function install() {
 /**
  * 安装全部依赖
  */
-function installDependencies() {
+function installDependencies(type) {
     return new Promise((resolve, reject) => {
         try {
-            log("安装依赖中...");
-            child_process.execSync(`cnpm i`, { cwd });
-            log("依赖安装完毕");
+            log(`正在安装CLI plugins. 这可能需要一点时间...`);
+            let cmd = `${type === 1 ? 'cnpm' : 'npm'} i`;
+            child_process.execSync(cmd, { cwd });
+            log("安装成功");
             resolve();
         } catch (e) {
-            reject(new Error(`执行cnpm install时发生错误，请尝试手动安装`));
+            reject(new Error(`执行${type === 1 ? 'cnpm' : 'npm'} install时发生错误，请尝试手动安装`));
         }
     });
 }

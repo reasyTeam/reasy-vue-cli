@@ -1,13 +1,5 @@
 <template>
   <div>
-    <div class="g-logo align-c">
-      <h2>@ReasyTeam</h2>
-      <a herf="https://github.com/reasyTeam/reasy-vue-cli">REASY-VUE-CLI</a>
-    </div>
-    
-    <v-group title="下拉框">
-      <v-select :dataKey="select"></v-select>
-    </v-group>
     <v-group title="复选框">
       <v-checkbox :dataKey="checkbox"></v-checkbox>
     </v-group>
@@ -19,6 +11,9 @@
     </v-group>
     <v-group title="滑块">
       <v-slider min="1" max="23" v-model="slider"></v-slider>
+    </v-group>
+    <v-group title="下拉框">
+      <v-select :dataKey="select"></v-select>
     </v-group>
   </div>
 </template>

@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 const child_process = require("child_process");
+const inquirer = require('inquirer');
 
 class FileOperation {
     /**
@@ -26,7 +27,7 @@ class FileOperation {
      * @param {*callback} cb 
      */
     rmdirSync(dir, deleteSelf = true) {
-        (function() {
+        (function () {
             function iterator(url, dirs) {
                 let stat = fs.statSync(url);
                 if (stat.isDirectory()) {
@@ -43,7 +44,7 @@ class FileOperation {
                     iterator(path + "/" + el, dirs);
                 }
             }
-            return function(dir) {
+            return function (dir) {
                 let dirs = [];
 
                 try {
@@ -145,7 +146,7 @@ function isOffLine() {
         log(`检查网络连接状态`);
         https
             .get("https://www.npmjs.com", res => {
-                res.on("data", () => {});
+                res.on("data", () => { });
                 res.on("end", () => {
                     log(`网络通畅`);
                     resolve();
@@ -178,19 +179,36 @@ function isOffLine() {
  * 检测是否按照cnpm
  */
 function isCnpmInstalled() {
+    log(`检查是否已安装cnpm`);
     return new Promise((resolve, reject) => {
         try {
             child_process.execSync(`cnpm -v`);
             log(`cnpm已经安装`);
-            resolve();
+            resolve(1);
         } catch (e) {
             log(`cnpm未安装,安装中,请稍等...(安装过程注意保持网络通畅)`);
             try {
                 child_process.execSync(`npm i cnpm -g`);
                 log(`cnpm安装完毕`);
-                resolve();
+                resolve(1);
             } catch (e) {
-                reject(new Error(`cnpm安装过程中出现错误，请手动安装后重试`));
+                inquirer
+                    .prompt([
+                        {
+                            name: 'confirm',
+                            type: 'confirm',
+                            message: 'cnpm安装过程中出现错误，是否通过npm进行安装(部分依赖包可能会安装失败)？'
+                        }
+                    ])
+                    .then(answers => {
+                        console.log(answers);
+                        if (answers.confirm) {
+                            resolve(-1);
+                        } else {
+                            log('cnpm安装过程中出现错误，请手动安装后重试');
+                            reject(e);
+                        }
+                    });
             }
         }
     });

@@ -7,6 +7,7 @@
       </div>
       <div class="mian-bg-bar"></div>
       <div class="main-content-box">
+        <ad></ad>
         <router-view></router-view>
       </div>
     </div>

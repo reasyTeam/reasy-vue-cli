@@ -16,6 +16,8 @@
 15. 添加reasy-team-Vue-cli
 不输入init指令时默认那啥
 
+添加指令，创建文件夹，并在文件夹中初始化
+
 
 babel-plugin-transform-runtime不能转换所有新的api，故使用babel-polyfill
 
