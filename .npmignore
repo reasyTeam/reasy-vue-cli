@@ -2,3 +2,6 @@
 .vscode
 todo.md
 node_modules
+dist
+static
+test
