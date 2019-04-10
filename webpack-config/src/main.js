@@ -3,7 +3,7 @@ import App from '@/App';
 import router from '@/router';
 import ReasyUIVue from '@reasy-team/reasy-ui-vue';
 import $http from '@/libs/http';
-import '@/assets/lang/b28n.js';
+import translate from '@/assets/lang/b28n.js';
 import '@/css/common.scss';
 import Ad from '@/pages/components/ad';
 
@@ -19,6 +19,7 @@ router.beforeEach((to, from, next) => {
 
 // 挂载全局请求方法
 Vue.prototype.$http = $http;
+Vue.prototype._ = translate;
 
 var vm = new Vue({
     el: '#app',

@@ -31,10 +31,10 @@ const routes = [
     },
     // 未匹配到的路由全部重定向到index，如果项目提供404页面，可以修改为重定向到404
     { path: '*', redirect: 'index' }
-]
+];
 
 const router = new VueRouter({
     routes
-})
+});
 
 export default router;

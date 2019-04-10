@@ -18,7 +18,8 @@ let mockConfig = require('../mockhttp.js'),
 // mock-mini-server相关配置
 if (config.dev.serverType === 1) {
     mockConfig.contentBase = path.join(__dirname, '../src/');
-    mockConfig.port = config.dev.proxyPort
+    mockConfig.port = config.dev.proxyPort;
+    mockConfig.dev = false;
     mockConfig.openBrowser = false;
     server = mockServer.run(mockConfig);
 }

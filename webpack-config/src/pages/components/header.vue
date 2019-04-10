@@ -2,7 +2,7 @@
   <div id="header" class="header">
     <img src="@/assets/img/logo.png" class="head-logo" alt="tenda">
     <div class="header-drop">
-      <a href="/goform/logout">Logout</a>
+      <a href="/goform/logout">{{_('Logout')}}</a>
       <!-- 语言切换 -->
     </div>
   </div>

@@ -30,6 +30,10 @@ module.exports = {
      */
     middleWare: null,
     /**
+     * 是否是开发模式，开发模式会输出日志
+     */
+    dev: true,
+    /**
      * Mock扩展
      */
     mockExtend: null

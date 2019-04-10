@@ -40,13 +40,12 @@ module.exports = {
     },
 
     module: {
-        rules: [
-            // { // NOTE: You also need to install eslint from npm, if you haven't already:
-            //     enforce: "pre",
-            //     test: /\.js$/,
-            //     exclude: /node_modules/,
-            //     loader: "eslint-loader",
-            // }, 
+        rules: [{
+                enforce: "pre",
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "eslint-loader",
+            },
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',

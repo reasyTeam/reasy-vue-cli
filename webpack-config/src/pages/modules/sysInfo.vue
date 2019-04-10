@@ -1,5 +1,8 @@
 <template>
   <div>
+    <v-group title="下拉框">
+      <v-select :dataKey="select"></v-select>
+    </v-group>
     <v-group title="复选框">
       <v-checkbox :dataKey="checkbox"></v-checkbox>
     </v-group>
@@ -11,9 +14,6 @@
     </v-group>
     <v-group title="滑块">
       <v-slider min="1" max="23" v-model="slider"></v-slider>
-    </v-group>
-    <v-group title="下拉框">
-      <v-select :dataKey="select"></v-select>
     </v-group>
   </div>
 </template>
@@ -48,19 +48,19 @@ export default {
         title: _("Login"),
         sortArray: [
           {
-            value: "2",
+            value: 2,
             title: "label 2"
           },
           {
-            value: "0",
+            value: 0,
             title: "label 0"
           },
           {
-            value: "1",
+            value: 1,
             title: "label 1"
           }
         ],
-        key: ["2"],
+        key: [2],
         changeCallBack(value) {
           console.log("radio value ", value);
         }
@@ -69,25 +69,25 @@ export default {
         title: _("Login"),
         sortArray: [
           {
-            value: "2",
+            value: 2,
             title: "label 2"
           },
           {
-            value: "0",
+            value: 0,
             title: "label 0"
           },
           {
-            value: "1",
+            value: 1,
             title: "label 1"
           }
         ],
         //or
         options: {
-          "1": "label 1",
-          "2": "label 2",
-          "0": "label 0"
+          1: "label 1",
+          2: "label 2",
+          0: "label 0"
         },
-        val: "2",
+        val: 2,
         changeCallBack(value) {
           console.log("radio value ", value);
         }
