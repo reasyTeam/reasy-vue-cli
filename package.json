@@ -1,6 +1,7 @@
 {
-    "name": "reasy-vue-cli",
+    "name": "@reasy-team/reasy-vue-cli",
     "version": "0.1.0",
+    "author": "moshang-xc",
     "description": "vue-cli for tenda front-end team",
     "main": "index.js",
     "bin": {
@@ -28,7 +29,6 @@
         "type": "git",
         "url": "git+https://github.com/reasyTeam/reasy-vue-cli.git"
     },
-    "author": "moshang-xc",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/reasyTeam/reasy-vue-cli/issues"
