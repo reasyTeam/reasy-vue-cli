@@ -10,7 +10,7 @@
 ## 安装和使用
 ```
 # 安装
-npm install reasy-vue-cli -g
+npm i @reasy-team/reasy-vue-cli -g
 
 # 使用，myApp为项目路径
 reasy-vue-cli myApp
