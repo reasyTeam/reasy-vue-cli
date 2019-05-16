@@ -83,7 +83,7 @@ npm run server
 - `css/vars.scss`中的css变量与组件是保持一致的，故不能随意修改组件相关的变量，以免风格不统一
 - 运行`npm run build`需要确保`npm run dll`已被运行过生成相应的`dll`文件
 
-## 翻译相关
+## 语言相关
 
 全局注入翻译函数`Vue.prototype._`，这样在所有的组件上都能通过`this._('xxx')`去调用翻译函数，当然`window._('xxx')`依然有效，对于`template`中的词条需要如下书写形式才能正确的进行翻译
 ```js
