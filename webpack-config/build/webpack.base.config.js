@@ -55,7 +55,13 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-                    'css-loader',
+                    // 'css-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: devMode,
+                        },
+                    },
                     'postcss-loader'
                 ],
                 exclude: /node_modules/
@@ -63,13 +69,24 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-                    'css-loader',
+                    // 'css-loader',
+                    {
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: devMode
+                        }
+                    },
                     'postcss-loader',
-                    'sass-loader',
+                    // 'sass-loader',
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: devMode
+                        }
+                    },
                     {
                         loader: 'sass-resources-loader',
                         options: {
-                            // sourceMap: true,
                             resources: require.resolve('../src/css/vars.scss')
                         }
                     }

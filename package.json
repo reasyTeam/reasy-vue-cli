@@ -1,6 +1,6 @@
 {
     "name": "@reasy-team/reasy-vue-cli",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "author": "moshang-xc",
     "description": "vue-cli for tenda front-end team",
     "main": "index.js",
